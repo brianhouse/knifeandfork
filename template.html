@@ -1,0 +1,44 @@
+<!doctype html> 
+<html prefix="og: http://ogp.me/ns#" lang="en"> 
+<head>
+    <title>Brian House + Sue Huang</title>
+    <meta charset="utf-8"/>
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Brian House + Sue Huang" /> 
+    <meta name="copyright" content="Brian House + Sue Huang" /> 
+    <meta name="description" content="Brian House + Sue Huang" />
+    <link rel="stylesheet" type="text/css" href="style.css" />  
+    <link rel="stylesheet" type="text/css" href="lib/slick.css" /> 
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400" rel="stylesheet">
+</head>
+<body>
+
+
+<div id="container">
+
+<h1>Brian House + Sue Huang</h1>
+
+{% for project in projects %}
+<div class="project">
+    <h2>{{ project.title }} {% if not loop.last %}({{ project.year }}){% endif %}</h2>
+    {% if project.video and project.aspect %}
+    <div class="embed-container" style="padding-bottom: {{ project.aspect * 100.0 }}%"><iframe src="https://player.vimeo.com/video/{{ project.video }}?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+    {% endif %}
+    <div class="text">{{ project.text }}</div>
+    <div class="credits">
+        {% for item in project.credits %}
+            {%- for role in item -%}
+                {{ role }}: {% for name in item[role] %}{{ name }}{{", " if not loop.last }}{% endfor %}
+            {%- endfor -%}
+            {{"; " if not loop.last }}
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
