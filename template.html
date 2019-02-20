@@ -22,7 +22,7 @@
 
 {% for project in projects %}
 <div class="project">
-    <h2>{{ project.title }} {% if not loop.last %}({{ project.year }}){% endif %}</h2>
+    {% if project.title %}<h2>{{ project.title }} ({{ project.year }})</h2>{% endif %}
     {% if project.video and project.aspect %}
     <div class="embed-container" style="padding-bottom: {{ project.aspect * 100.0 }}%"><iframe src="https://player.vimeo.com/video/{{ project.video }}?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
     {% endif %}
