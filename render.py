@@ -7,9 +7,9 @@ directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "content"))
 projects = []
 for filename in os.listdir(directory):
     with open(os.path.join(directory, filename)) as f:
-        project = yaml.load(f)
+        project = yaml.safe_load(f)
         if 'text' in project:
-            project['text'] = markdown.markdown(project['text'].strip())   
+            project['text'] = markdown.markdown(project['text'].strip())
         projects.append(project)
 
 projects.sort(key=lambda project: int(project['year']))
